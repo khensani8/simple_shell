@@ -1,19 +1,27 @@
 #include "shell.h"
-#include <sys/wait.h>
 
-/**
+/*
  * rd_line - read single line from input
  *
  * Return: command input
  */
 char *rd_line(void)
 {
-	char *line = NULL;
-	size_t n = 0;
+    char *line = NULL;
+    size_t n = 0;
 
-	getline(&line, &n, stdin);
-	
-	return (line);
+    if (isatty(STDIN_FILENO))
+        write(STDOUT_FILENO, "($) ", 4);
+
+    if (getline(&line, &n, stdin) == -1)
+    {
+        if (isatty(STDIN_FILENO))
+            write(STDOUT_FILENO, "\n", 1);
+        free(line);
+        return NULL;
+    }
+
+    return line;
 }
 
 /**
@@ -25,31 +33,30 @@ char *rd_line(void)
  */
 char **split_line(char *line)
 {
-	int i, bufsize;
-	char *delim, *tok;
-	char **toks;
-	
-	bufsize = 64;
-	delim = " ";
-	toks = malloc(bufsize * sizeof(char *));
-	i = 0;
-	tok = strtok(line, delim);
-	while (tok != NULL)
-	
-	{
-		toks[i] = tok;
-		i++;
-		
-		if (i >= bufsize)
-		{
-			bufsize += 64;
-			toks = realloc(toks, bufsize * sizeof(char *));
-		}
-		tok = strtok(NULL, delim);
-	}
-	toks[i] = NULL;
-	
-	return (toks);
+    int i, bufsize;
+    char *delim, *tok;
+    char **toks;
+
+    bufsize = 64;
+    delim = " \t\n\r\a";
+    toks = malloc(bufsize * sizeof(char *));
+
+    i = 0;
+    tok = strtok(line, delim);
+    while (tok != NULL)
+    {
+        toks[i] = tok;
+        i++;
+        if (i >= bufsize)
+        {
+            bufsize += 64;
+            toks = realloc(toks, bufsize * sizeof(char *));
+        }
+
+        tok = strtok(NULL, delim);
+    }
+    toks[i] = NULL;
+    return toks;
 }
 
 /**
@@ -61,26 +68,27 @@ char **split_line(char *line)
  */
 int act(char **ar)
 {
-	pid_t child = fork();
+    pid_t child = fork();
 
-	if (child == 0)
-	{
-		if (execvp(ar[0], ar) == -1)
-		{
-			perror("hsh");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else if (child < 0)
-	{
-		perror("hsh");
-	}
-	else
-	{
-		int status;
-		wait(&status); /* Wait for the child process to complete */
-	}
-	return (1);
+    if (child == 0)
+    {
+        if (execve(ar[0], ar, NULL) == -1)
+        {
+            perror("hsh");
+            exit(EXIT_FAILURE);
+        }
+    }
+    else if (child < 0)
+    {
+        perror("hsh");
+    }
+    else
+    {
+        int status;
+        wait(&status); /* Wait for the child process to complete */
+    }
+
+    return 1;
 }
 
 /**
@@ -90,33 +98,38 @@ int act(char **ar)
  */
 int main(void)
 {
-	char *line, **tok;
+    char *line, **tok;
 
-	while (1)
-	{
-		/* prompt */
-		printf("($) ");
+    while (1)
+    {
+        line = rd_line();
+        if (line == NULL)
+        {
+            break;
+        }
 
-		line = rd_line();
-		tok = split_line(line);
+        tok = split_line(line);
+        if (tok[0] != NULL)
+        {
+            if (strcmp(tok[0], "exit") == 0)
+            {
+                /* Free allocated memory before exiting */
+                free(tok);
+                free(line);
+                if (isatty(STDIN_FILENO))
 		
-		if (tok[0] != NULL)
-		{
-			if (strcmp(tok[0], "exit") == 0)
-			{
-				/* Free allocated memory before exiting */
-				free(tok);
-				free(line);
-				break; /* Exit the while loop */
-			}
-			else
-			{
-				act(tok);
-			}
-		}
-		free(tok);
-		free(line);
-	}
-	return (0);
+			break;
+            }
+            else
+            {
+                act(tok);
+            }
+        }
+
+        free(tok);
+        free(line);
+    }
+
+    return 0;
 }
 
