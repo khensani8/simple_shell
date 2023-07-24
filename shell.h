@@ -22,5 +22,8 @@ int process(char *path, char **ar);
 /***** PATH *****/
 char *findpath(char *cmd, char *fullpath, char *path);
 
+/***** BUILT-INS *****/
+int handle_builtin(char **ar);
+
 #endif 
 
