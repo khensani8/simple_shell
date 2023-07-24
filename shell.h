@@ -8,13 +8,19 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <signal.h>
 
+/***** ENVIRONMENT *****/
+extern char **environ;
+
+/***** FUNCTIONS *****/
 char *rd_line(void);
 char **split_line(char *line);
-int act(char **ar);
+
+/***** EXECUTE *****/
+int process(char *path, char **ar);
+
+/***** PATH *****/
+char *findpath(char *cmd, char *fullpath, char *path);
 
 #endif 
 
