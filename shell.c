@@ -13,13 +13,13 @@ int main(int argc, char *argv[])
 	char *line, **tok;
 	char *path, *fullpath;
 
-	(void) argc; (void) argv;
+	(void) argc;
+	(void) argv;
 
 	while (1)
 	{
 		/* prompt */
 		write(STDOUT_FILENO, "($) ", 4);
-		
 		line = rd_line();
 		tok = split_line(line);
 		if (tok[0] != NULL)
@@ -40,6 +40,10 @@ int main(int argc, char *argv[])
 			fullpath = tok[0];
 
 		process(fullpath, tok);
+
+		free(line);
+		free(tok);
+		free(fullpath);
 	}
 	return (0);
 }
