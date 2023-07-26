@@ -12,6 +12,12 @@ char *rd_line(void)
 	ssize_t read = 0;
 
 	read = getline(&line, &n, stdin);
+	if (read == -1)
+	{
+		free(line);
+		write(STDOUT_FILENO, "\n", 1);
+		exit(EXIT_SUCCESS);
+	}
 	if (read == EOF || strcmp("exit\n", line) == 0)
 	{
 		free(line);
