@@ -7,13 +7,13 @@
  */
 int handle_builtin(char **cmd)
 {
-	if (_strcmp(*cmd, "exit") == 0)
+	if (strcmp(*cmd, "exit") == 0)
 	{
 		hsh_exit();
 		exit(EXIT_SUCCESS);
 	}
 
-	if (_strcmp(*cmd, "env") == 0)
+	if (strcmp(*cmd, "env") == 0)
 	{
 		print_env();
 		return (1);

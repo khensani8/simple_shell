@@ -17,7 +17,7 @@ int main(void)
 			write(STDOUT_FILENO, "($) ", 4);
 
 		line = rd_line();
-		if (_strcmp(line, "\n") == 0)
+		if (strcmp(line, "\n") == 0)
 		{
 			free(line);
 			continue;

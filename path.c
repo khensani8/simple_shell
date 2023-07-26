@@ -17,7 +17,7 @@ char *findpath(char *cmd, char *fullpath, char *path)
 		perror("hsh");
 		return (NULL);
 	}
-	_strcpy(p_cpy, path);
+	strcpy(p_cpy, path);
 	/* copy PATH dir + cmd name and check if it exists */
 	tok = strtok(p_cpy, ":");
 	if (tok == NULL)
@@ -33,9 +33,9 @@ char *findpath(char *cmd, char *fullpath, char *path)
 			return (NULL);
 		}
 
-		_strcpy(fullpath, tok);
+		strcpy(fullpath, tok);
 		fullpath[len] = '/';
-		_strcpy(fullpath + len + 1, cmd);
+		strcpy(fullpath + len + 1, cmd);
 		fullpath[len + _strlen(cmd) + 1] = '\0';
 		if (access(fullpath, X_OK) != 0)
 		{
