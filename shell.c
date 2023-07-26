@@ -25,9 +25,7 @@ int main(void)
 		tok = split_line(line);
 		if (tok[0] == NULL)
 			continue;
-
-		if (check_builtin(tok))
-			continue;
+		check_builtin(tok);
 
 		path = _getenv("PATH");
 		fullpath = findpath(tok[0], fullpath, path);

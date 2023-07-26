@@ -11,7 +11,7 @@ char *findpath(char *cmd, char *fullpath, char *path)
 	unsigned int len;
 	char *p_cpy, *tok;
 
-	p_cpy = malloc(sizeof(char) * _strlen(path) + 1);
+	p_cpy = malloc(sizeof(char) * strlen(path) + 1);
 	if (p_cpy == NULL)
 	{
 		perror("hsh");
@@ -25,8 +25,8 @@ char *findpath(char *cmd, char *fullpath, char *path)
 
 	while (tok != NULL)
 	{
-		len = _strlen(tok);
-		fullpath = malloc(sizeof(char) * (len + _strlen(cmd) + 2));
+		len = strlen(tok);
+		fullpath = malloc(sizeof(char) * (len + strlen(cmd) + 2));
 		if (fullpath == NULL)
 		{
 			perror("hsh");
@@ -36,7 +36,7 @@ char *findpath(char *cmd, char *fullpath, char *path)
 		strcpy(fullpath, tok);
 		fullpath[len] = '/';
 		strcpy(fullpath + len + 1, cmd);
-		fullpath[len + _strlen(cmd) + 1] = '\0';
+		fullpath[len + strlen(cmd) + 1] = '\0';
 		if (access(fullpath, X_OK) != 0)
 		{
 			free(fullpath);
