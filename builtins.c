@@ -6,7 +6,7 @@
  */
 int hsh_exit(void)
 {
-	return (-1);
+	exit(0);
 }
 
 /**
@@ -25,20 +25,3 @@ int print_env(void)
 	}
 	return (0);
 }
-
-/**
- * hsh_cd - change directories
- * Return: ...
- *
-int hsh_cd(char **ar)
-{
-	if (ar[1] == NULL)
-		perror("hsh");
-	else
-	{
-		if (chdir(ar[1]) != 0)
-			perror("hsh");
-	}
-
-	return (1);
-}*/

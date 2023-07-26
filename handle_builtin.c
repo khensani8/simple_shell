@@ -2,45 +2,39 @@
 
 /**
  * handle_builtins - executes builtins
- *
  * @arg: argument entered
- *
  * Return: builtin to execute
  */
-int handle_builtins(char **arg)
+int handle_builtin(char **cmd)
 {
-	builtin_t builtin[] = {
-		{"exit", hsh_exit},
-		{"env", print_env},
-		{NULL, NULL}
-	};
-	int i, n;
-
-	/* empty command */
-	if (arg[0] == NULL)
-		return (1);
-
-	n = builtins_count(builtin);
-	for (i = 0; i < n; i++)
+	if (strcmp(*cmd, "exit") == 0)
 	{
-		if (strcmp(arg[0], builtin[i].cmd) == 0)
-			return ((builtin[i].ptr)());
+		hsh_exit();
+		exit(EXIT_SUCCESS);
 	}
+
+	if (strcmp(*cmd, "env") == 0)
+	{
+		print_env();
+		return (1);
+	}
+
 	return (0);
 }
 
 /**
- * builtin_count - ..
- * builtin: builtin to be tallied
- * Return: builtin count
+ * check_builtin - checks for builtin
+ * @cmd: split line
+ * Return: 1 if cmd excuted, 0 if cmd is not executed
  */
-int builtins_count(builtin_t builtin[])
+int check_builtin(char **cmd)
 {
-	unsigned int i;
-
-	i = 0;
-	while (builtin[i].cmd != NULL)
-		i++;
-
-	return (i);
+	if (handle_builtin(cmd))
+		return (1);
+	else if (**cmd == '/')
+	{
+		process(cmd[0], cmd);
+		return (1);
+	}
+	return (0);
 }

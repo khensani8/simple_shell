@@ -9,12 +9,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-typedef struct builtin_t
-{
-	char *cmd;
-	int (*ptr)(void);
-} builtin_t;
-
 /***** ENVIRONMENT *****/
 extern char **environ;
 char *_getenv(char *envp);
@@ -31,7 +25,7 @@ char *findpath(char *cmd, char *fullpath, char *path);
 /***** BUILT-INS *****/
 int hsh_exit(void);
 int hsh_cd(char **ar);
-int builtins_count(builtin_t builtin[]);
-int handle_builtins(char **arg);
+int check_builtin(char **cmd);
+int handle_builtin(char **cmd);
 
-#endif 
+#endif
