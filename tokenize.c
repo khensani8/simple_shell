@@ -32,6 +32,5 @@ char **split_line(char *line)
 		tok = strtok(NULL, delim);
 	}
 	toks[i] = NULL;
-	free(toks);
 	return (toks);
 }

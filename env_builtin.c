@@ -37,5 +37,3 @@ int handle_builtin(char **ar)
 	}
 	return (0);
 }
-
-

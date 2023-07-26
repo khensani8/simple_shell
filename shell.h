@@ -15,8 +15,8 @@ extern char **environ;
 /***** FUNCTIONS *****/
 char *rd_line(void);
 char **split_line(char *line);
-
-/***** EXECUTE *****/
+void print_env(void);
+int handle_builtin(char **ar);
 int process(char *path, char **ar);
 
 /***** PATH *****/
@@ -26,4 +26,3 @@ char *findpath(char *cmd, char *fullpath, char *path);
 int handle_builtin(char **ar);
 
 #endif 
-

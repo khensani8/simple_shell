@@ -12,11 +12,15 @@ char *rd_line(void)
 	ssize_t read = 0;
 
 	read = getline(&line, &n, stdin);
-	if (read == EOF)
+	if (read == EOF || strcmp("exit\n", line) == 0)
 	{
-		write(1, "\n", 1);
 		free(line);
 		exit(EXIT_SUCCESS);
 	}
+	line[read - 1] = '\0';
+
+	if (strcmp("env", line) == 0)
+		print_env();
+
 	return (line);
 }
