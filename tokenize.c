@@ -13,12 +13,19 @@ char **split_line(char *line)
 	char *delim, *tok;
 	char **toks;
 
-	bufsize = 64;
+	bufsize = 1024;
 	delim = " \t\n\r\a";
 	toks = malloc(bufsize * sizeof(char *));
-	i = 0;
+
+	if (toks == NULL)
+	{
+		perror("hsh");
+		exit(EXIT_FAILURE);
+	}
+
 	tok = strtok(line, delim);
 
+	i = 0;
 	while (tok != NULL)
 	{
 		toks[i] = tok;
@@ -26,11 +33,12 @@ char **split_line(char *line)
 
 		if (i >= bufsize)
 		{
-			bufsize += 64;
+			bufsize += 1024;
 			toks = realloc(toks, bufsize * sizeof(char *));
 		}
 		tok = strtok(NULL, delim);
 	}
 	toks[i] = NULL;
+
 	return (toks);
 }

@@ -24,6 +24,7 @@ int process(char *path, char **ar)
 	else if (child < 0)
 	{
 		perror("hsh");
+		exit(EXIT_FAILURE);
 	}
 	else
 		wait(&status);

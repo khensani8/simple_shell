@@ -18,7 +18,7 @@ char *findpath(char *cmd, char *fullpath, char *path)
 		return (NULL);
 	}
 	strcpy(p_cpy, path);
-	/* copy PATH directory + command name and check if it exists */
+	/* copy PATH dir + cmd name and check if it exists */
 	tok = strtok(p_cpy, ":");
 	if (tok == NULL)
 		tok = strtok(NULL, ":");

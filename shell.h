@@ -11,18 +11,16 @@
 
 /***** ENVIRONMENT *****/
 extern char **environ;
+char *_getenv(char *envp);
 
 /***** FUNCTIONS *****/
 char *rd_line(void);
 char **split_line(char *line);
 void print_env(void);
-int handle_builtin(char **ar);
 int process(char *path, char **ar);
 
 /***** PATH *****/
 char *findpath(char *cmd, char *fullpath, char *path);
-
 /***** BUILT-INS *****/
-int handle_builtin(char **ar);
 
 #endif 
