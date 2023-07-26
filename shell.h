@@ -27,5 +27,11 @@ int hsh_exit(void);
 int hsh_cd(char **ar);
 int check_builtin(char **cmd);
 int handle_builtin(char **cmd);
+ 
+/***** STRING FUNCTIONS *****/
+char *_strcat(char *dest, char *src);
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
 
 #endif
