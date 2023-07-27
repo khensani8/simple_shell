@@ -28,7 +28,6 @@ int hsh_exit(void);
 int hsh_cd(char **ar);
 int check_builtin(char **cmd);
 int handle_builtin(char **cmd);
-int change_dir(char **cmd, __attribute__((unused)) int st);
 
 /***** STRING FUNCTIONS *****/
 char *_strcat(char *dest, char *src);
