@@ -42,3 +42,13 @@ char **split_line(char *line)
 
 	return (toks);
 }
+
+/**
+ * free_tokens - Frees the memory allocated for an array of tokens.
+ *
+ * @toks: The array of tokens to be freed.
+ */
+void free_tokens(char **toks)
+{
+	free(toks);
+}
