@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <limits.h>
 
 #define BUFSIZE 1024
 
@@ -35,5 +36,8 @@ char *_strcat(char *dest, char *src);
 int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
+
+/**** FREE *****/
+void free_tokens(char **toks);
 
 #endif
