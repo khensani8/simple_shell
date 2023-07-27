@@ -1,15 +1,6 @@
 #include "shell.h"
 
 /**
- * hsh_exit - exits shell
- * Return: void
- */
-int hsh_exit(void)
-{
-	exit(0);
-}
-
-/**
  * print_env - print environment
  * Return: ...
  */
@@ -25,3 +16,14 @@ int print_env(void)
 	}
 	return (0);
 }
+
+/**
+ * shell_exit - exits the shell
+ */
+void shell_exit(void)
+{
+	/* Perform any cleanup or saving state here if necessary */
+	
+	exit(EXIT_SUCCESS);
+}
+

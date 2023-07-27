@@ -24,12 +24,22 @@ int main(void)
 		}
 		tok = split_line(line);
 		if (tok[0] == NULL)
+		{
+			free(line);
+			free(tok);
 			continue;
+		}
 
 		path = _getenv("PATH");
 		fullpath = findpath(tok[0], fullpath, path);
 		if (fullpath == NULL)
 			fullpath = tok[0];
+		if (_strcmp(tok[0], "exit") == 0)
+		{
+			free(line);
+			free(tok);
+			shell_exit();
+		}
 		process(fullpath, tok);
 
 		free(line);

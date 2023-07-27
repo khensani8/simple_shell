@@ -9,7 +9,8 @@ int handle_builtin(char **cmd)
 {
 	if (_strcmp(*cmd, "exit") == 0)
 	{
-		hsh_exit();
+		shell_exit();
+		/*hsh_exit();*/
 		exit(EXIT_SUCCESS);
 	}
 
