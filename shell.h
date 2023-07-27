@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <limits.h>
 
 /***** ENVIRONMENT *****/
 extern char **environ;
@@ -27,6 +28,7 @@ int hsh_exit(void);
 int hsh_cd(char **ar);
 int check_builtin(char **cmd);
 int handle_builtin(char **cmd);
+int change_dir(char **cmd, __attribute__((unused)) int st);
 
 /***** STRING FUNCTIONS *****/
 char *_strcat(char *dest, char *src);
