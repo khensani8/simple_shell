@@ -11,13 +11,13 @@ char *findpath(char *cmd, char *fullpath, char *path)
 	unsigned int len;
 	char *p_cpy, *tok;
 
-	p_cpy = malloc(sizeof(char) * strlen(path) + 1);
+	p_cpy = malloc(sizeof(char) * _strlen(path) + 1);
 	if (p_cpy == NULL)
 	{
 		perror("hsh");
 		return (NULL);
 	}
-	strcpy(p_cpy, path);
+	_strcpy(p_cpy, path);
 	/* copy PATH dir + cmd name and check if it exists */
 	tok = strtok(p_cpy, ":");
 	if (tok == NULL)
@@ -25,18 +25,18 @@ char *findpath(char *cmd, char *fullpath, char *path)
 
 	while (tok != NULL)
 	{
-		len = strlen(tok);
-		fullpath = malloc(sizeof(char) * (len + strlen(cmd) + 2));
+		len = _strlen(tok);
+		fullpath = malloc(sizeof(char) * (len + _strlen(cmd) + 2));
 		if (fullpath == NULL)
 		{
 			perror("hsh");
 			return (NULL);
 		}
 
-		strcpy(fullpath, tok);
+		_strcpy(fullpath, tok);
 		fullpath[len] = '/';
-		strcpy(fullpath + len + 1, cmd);
-		fullpath[len + strlen(cmd) + 1] = '\0';
+		_strcpy(fullpath + len + 1, cmd);
+		fullpath[len + _strlen(cmd) + 1] = '\0';
 		if (access(fullpath, X_OK) != 0)
 		{
 			free(fullpath);
