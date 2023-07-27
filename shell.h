@@ -13,6 +13,8 @@
 /***** ENVIRONMENT *****/
 extern char **environ;
 char *_getenv(char *envp);
+int _setenv(const char *variable, const char *value);
+int _unsetenv(const char *name);
 
 /***** FUNCTIONS *****/
 char *rd_line(void);

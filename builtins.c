@@ -23,7 +23,6 @@ int print_env(void)
 void shell_exit(void)
 {
 	/* Perform any cleanup or saving state here if necessary */
-	
 	exit(EXIT_SUCCESS);
 }
 

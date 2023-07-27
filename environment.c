@@ -25,6 +25,34 @@ char *_getenv(char *envp)
 	return (&environ[i][j + 1]);
 }
 
+/**
+ * _setenv - Set or modify an environment variable
+ *
+ * @variable: The name of the environment variable to set/modify
+ * @value: The value to assign to the environment variable
+ *
+ * Return: 0 on success, -1 on failure
+ */
+int _setenv(const char *variable, const char *value)
+{
+	int ret = setenv(variable, value, 1);
+
+	if (variable == NULL || variable[0] == '\0' || value == NULL)
+	{
+		char *error_msg = "Invalid argument for setenv\n";
+
+		write(STDERR_FILENO, error_msg, strlen(error_msg));
+		return (-1);
+	}
+	if (ret != 0)
+	{
+		char *error_msg = "setenv failed\n";
+
+		write(STDERR_FILENO, error_msg, strlen(error_msg));
+		return (-1);
+	}
+	return (0);
+}
 
 /**
  * _unsetenv - Unset an environment variable
