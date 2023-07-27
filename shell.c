@@ -45,6 +45,6 @@ int main(void)
 		free(line);
 		free(tok);
 	}
-
+	free(fullpath);
 	return (0);
 }

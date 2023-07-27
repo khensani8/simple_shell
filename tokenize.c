@@ -22,10 +22,9 @@ char **split_line(char *line)
 		perror("hsh");
 		exit(EXIT_FAILURE);
 	}
-
 	tok = strtok(line, delim);
-
 	i = 0;
+
 	while (tok != NULL)
 	{
 		toks[i] = tok;
