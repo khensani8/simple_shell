@@ -9,6 +9,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#define BUFSIZE 1024
+
 /***** ENVIRONMENT *****/
 extern char **environ;
 char *_getenv(char *envp);
@@ -23,7 +25,7 @@ int process(char *path, char **ar);
 char *findpath(char *cmd, char *fullpath, char *path);
 
 /***** BUILT-INS *****/
-int hsh_exit(void);
+void hsh_exit(char **ar);
 int hsh_cd(char **ar);
 int check_builtin(char **cmd);
 int handle_builtin(char **cmd);
