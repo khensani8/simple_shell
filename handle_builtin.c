@@ -7,13 +7,13 @@
  */
 int handle_builtin(char **cmd)
 {
+	if (!cmd[0])
+		return (0);
 	if (_strcmp(*cmd, "exit") == 0)
 	{
+		free(cmd);
 		shell_exit(cmd);
-		/*hsh_exit();*/
-		exit(EXIT_SUCCESS);
 	}
-
 	if (_strcmp(*cmd, "env") == 0)
 	{
 		print_env();
@@ -27,7 +27,7 @@ int handle_builtin(char **cmd)
  * check_builtin - checks for builtin
  * @cmd: split line
  * Return: 1 if cmd excuted, 0 if cmd is not executed
- */
+ *
 int check_builtin(char **cmd)
 {
 	if (handle_builtin(cmd))
@@ -38,4 +38,4 @@ int check_builtin(char **cmd)
 		return (1);
 	}
 	return (0);
-}
+}*/
