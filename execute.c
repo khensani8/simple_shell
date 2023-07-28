@@ -30,15 +30,18 @@ int no_builtins(void)
  * @args: List of args.  args[0] is "cd".  args[1] is the directory.
  * Return: 1 on success
  */
-int sh_cd(char **args)
+int sh_cd(char **ar)
 {
-	if (args[1] == NULL)
+
+	if (ar[1] == NULL)
 	{
-		fprintf(stderr, "hsh: expected argument to \"cd\"\n");
+		ar[1] = getenv("HOME");
+		if (ar[1] == NULL)
+			fprintf(stderr, "hsh: expected argument to \"cd\"\n");
 	}
 	else
 	{
-		if (chdir(args[1]) != 0)
+		if (chdir(ar[1]) != 0)
 		{
 			perror("hsh");
 		}
