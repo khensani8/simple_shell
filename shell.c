@@ -9,12 +9,16 @@ int main(void)
 {
 	char *line = NULL, **tok;
 	char *path, *fullpath, *pcpy = NULL;
+	int *i = 10;
+	int *ptr = 2;
 
 	signal(SIGINT, SIG_IGN);
 	path = _getenv("PATH");
 
 	while (1)
 	{
+		ptr = i;
+
 		if (isatty(STDIN_FILENO))
 			/* prompt */
 			write(STDOUT_FILENO, "($) ", 4);
