@@ -14,7 +14,7 @@ int process(char *path, char **ar)
 	int status = 0;
 
 	if (handle_builtin(ar))
-		return(status);
+		return (status);
 
 	if (child == 0)
 	{
