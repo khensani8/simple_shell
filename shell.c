@@ -24,15 +24,13 @@ int main(void)
 			free(tok);
 			continue;
 		}
-		if (_strcmp(tok[0], "exit") == 0)
+/*		if (_strcmp(tok[0], "exit") == 0)
                 {
                         free(line);
                         free(tok);
                         shell_exit();
                 }
-		if (_strcmp(tok[0], "env") == 0)
-			print_env();
-
+*/
 		path = _getenv("PATH");
 		fullpath = findpath(tok[0], fullpath, path);
 		if (fullpath == NULL)
