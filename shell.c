@@ -31,11 +31,7 @@ int main(void)
                         shell_exit();
                 }
 		if (_strcmp(tok[0], "env") == 0)
-		{
-			free(line);
-			free(tok);
 			print_env();
-		}
 
 		path = _getenv("PATH");
 		fullpath = findpath(tok[0], fullpath, path);

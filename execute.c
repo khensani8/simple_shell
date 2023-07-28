@@ -13,9 +13,6 @@ int process(char *path, char **ar)
 	pid_t child = fork();
 	int status = 0;
 
-	if (handle_builtin(ar))
-		return (status);
-
 	if (child == 0)
 	{
 		if (execve(path, ar, environ) == -1)
@@ -30,7 +27,10 @@ int process(char *path, char **ar)
 		free(ar);
 	}
 	else
+	{
 		wait(&status);
+		return (status);
+	}
 
 	return (0);
 }
