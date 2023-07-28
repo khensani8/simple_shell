@@ -20,12 +20,35 @@ int print_env(void)
 /**
  * shell_exit - exits the shell
  */
-void shell_exit(char **ar)
+void shell_exit()
 {
-	int status = 0;
-
-	if (ar[1] != NULL)
-		status = atoi(ar[1]);
 	/* Perform any cleanup or saving state here if necessary */
-	exit(status);
+	exit(EXIT_SUCCESS);
+}
+
+/**
+ * shell_cd - changes the current working directory of the shell
+ * @args: array of arguments
+ */
+void hsh_cd(char **args)
+{
+	char *dir = args[1];
+	int ret;
+
+	/* If no argument is provided, change to HOME directory */
+	if (dir == NULL)
+	{
+		dir = _getenv("HOME");
+		if (dir == NULL)
+		{
+			perror("hsh");
+			return;
+		}
+	}
+
+	ret = chdir(dir);
+	if (ret == -1)
+	{
+		perror("cd");
+	}
 }

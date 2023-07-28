@@ -28,10 +28,10 @@ int process(char *path, char **ar);
 char *findpath(char *cmd, char *fullpath, char *path);
 
 /***** BUILT-INS *****/
-int hsh_cd(char **ar);
+void hsh_cd(char **ar);
 int check_builtin(char **cmd);
 int handle_builtin(char **cmd);
-void shell_exit(char **ar);
+void shell_exit(void);
 
 /***** STRING FUNCTIONS *****/
 char *_strcat(char *dest, char *src);

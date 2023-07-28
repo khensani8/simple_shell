@@ -12,7 +12,7 @@ int handle_builtin(char **cmd)
 	if (_strcmp(*cmd, "exit") == 0)
 	{
 		free(cmd);
-		shell_exit(cmd);
+		shell_exit();
 	}
 	if (_strcmp(*cmd, "env") == 0)
 	{
