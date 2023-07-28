@@ -8,7 +8,7 @@
 int main(void)
 {
 	char *line = NULL, **tok;
-	char *path, *fullpath;
+	char *path, *fullpath, *pcpy = NULL;
 
 	signal(SIGINT, SIG_IGN);
 	path = _getenv("PATH");
@@ -27,9 +27,7 @@ int main(void)
 			continue;
 		}
 
-		fullpath = findpath(tok[0], fullpath, path);
-		if (fullpath == NULL)
-			fullpath = tok[0];
+		fullpath = findpath(tok, path, pcpy);
 		if (handle_builtin(tok, line) == 1)
 			continue;
 		else

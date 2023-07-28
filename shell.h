@@ -25,7 +25,7 @@ int print_env(void);
 int process(char *path, char **ar);
 
 /***** PATH *****/
-char *findpath(char *cmd, char *fullpath, char *path);
+/*char *findpath(char *cmd, char *fullpath, char *path);*/
 
 /***** BUILT-INS *****/
 void hsh_cd(char **ar);
@@ -44,4 +44,9 @@ int _strsep(char *str);
 void free_tokens(char **toks);
 void free_cmd(char **ar);
 
+/* may remove soon */
+char *pathconcat(char *buf, char **toks, char *tok);
+int cmpPATH(const char *s1, const char *s2);
+int _pathsep(char *str);
+char *findpath(char **cmd, char *path, char *pcpy);
 #endif
