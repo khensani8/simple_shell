@@ -12,7 +12,7 @@
 int process(char **ar, char *line, char *fullpath)
 {
 	pid_t child;
-	int status, exitstat;
+	int status;
 
 	child = fork();
 	if (child == -1)
@@ -31,12 +31,10 @@ int process(char **ar, char *line, char *fullpath)
 			exit(127);
 		}
 	}
-	wait(&status);
-
-	if (WIFEXITED(status))
-		exitstat = WEXITSTATUS(status);
-	free_cmd(ar);
-	free(ar);
-	free(line);
-	return (exitstat);
+	else
+	{
+		wait(&status);
+		return (status);
+	}
+	return (0);
 }

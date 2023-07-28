@@ -4,7 +4,6 @@
  * handle_builtin - executes builtins
  * @cmd: argument entered
  * @line: ...
- * @xstat: exit status
  * Return: builtin to execute
  */
 int handle_builtin(char **cmd, char *line)

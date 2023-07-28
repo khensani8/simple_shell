@@ -30,8 +30,11 @@ int main(void)
 		fullpath = findpath(tok, path, pcpy);
 		if (handle_builtin(tok, line) == 1)
 			continue;
-		process(tok, line, fullpath);
+		else
+			process(tok, line, fullpath);
 
+		free(line);
+		free(tok);
 	}
 	free(fullpath);
 	return (0);
