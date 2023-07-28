@@ -4,37 +4,39 @@
  * process - Execute a shell command in a new process
  *
  * @ar: array of arguments
- * @path: path to the executable file
+ * @line: ptr to input
+ * @fullpath: path to the executable file
  *
  * Return:...
  */
-
-int process(char *path, char **ar)
+int process(char **ar, char *line, char *fullpath)
 {
 	pid_t child;
-	int status = 0; 
+	int status, exitstat;
 
 	child = fork();
+	if (child == -1)
+	{
+		perror("hsh");
+		exit(1);
+	}
 	if (child == 0)
 	{
-		if (execve(path, ar, environ) == -1)
+		if (execve(fullpath, ar, environ) == -1)
 		{
-			perror("hsh");
+			perror(ar[0]);
+			free_cmd(ar);
 			free(ar);
-			free(path);
-			exit(EXIT_FAILURE);
+			free(line);
+			exit(127);
 		}
 	}
-	else if (child == -1)
-	{
-		perror(ar[0]);
-		free(ar);
-	}
-	else
-	{
-		wait(&status);
-		return (status);
-	}
+	wait(&status);
 
-	return (0);
+	if (WIFEXITED(status))
+		exitstat = WEXITSTATUS(status);
+	free_cmd(ar);
+	free(ar);
+	free(line);
+	return (exitstat);
 }

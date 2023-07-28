@@ -2,7 +2,7 @@
 
 /**
  * free_cmd - frees cmd allocation
- * @cmd: to be freed
+ * @ar: to be freed
  * Return: void
  */
 void free_cmd(char **ar)
@@ -20,5 +20,5 @@ void free_cmd(char **ar)
  */
 void free_tokens(char **toks)
 {
-        free(toks);
+	free(toks);
 }

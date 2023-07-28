@@ -22,15 +22,14 @@ int _unsetenv(const char *name);
 char *rd_line(void);
 char **split_line(char *line);
 int print_env(void);
-int process(char *path, char **ar);
+int process(char **ar, char *line, char *fullpath);
 
 /***** PATH *****/
 /*char *findpath(char *cmd, char *fullpath, char *path);*/
 
 /***** BUILT-INS *****/
-void hsh_cd(char **ar);
-int check_builtin(char **cmd);
-int handle_builtin(char **cmd, char *line);
+void _cd(char **ar);
+int handle_builtin(char **cmd, char *line, int xstat);
 void shell_exit(void);
 
 /***** STRING FUNCTIONS *****/

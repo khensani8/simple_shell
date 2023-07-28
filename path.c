@@ -82,7 +82,7 @@ int cmpPATH(const char *s1, const char *s2)
 {
 	int i = 0;
 
-	while(s2[i] != '=')
+	while (s2[i] != '=')
 	{
 		if (s1[i] != s2[i])
 			return (-1);

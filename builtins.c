@@ -20,17 +20,18 @@ int print_env(void)
 /**
  * shell_exit - exits the shell
  */
-void shell_exit()
+void shell_exit(void)
 {
 	/* Perform any cleanup or saving state here if necessary */
 	exit(EXIT_SUCCESS);
 }
 
 /**
- * shell_cd - changes the current working directory of the shell
+ * _cd - changes the current working directory of the shell
  * @args: array of arguments
+ * Return: ...
  */
-void hsh_cd(char **args)
+void _cd(char **args)
 {
 	char *dir = args[1];
 	int ret;

@@ -9,6 +9,7 @@ int main(void)
 {
 	char *line = NULL, **tok;
 	char *path, *fullpath, *pcpy = NULL;
+	int xstat = 0;
 
 	signal(SIGINT, SIG_IGN);
 	path = _getenv("PATH");
@@ -20,30 +21,22 @@ int main(void)
 			write(STDOUT_FILENO, "($) ", 4);
 
 		line = rd_line();
-		tok = split_line(line);
-		if (tok == NULL)
+		if (*line != '\0')
 		{
-			free(line);
-			continue;
-		}
+			tok = split_line(line);
+			if (tok == NULL)
+			{
+				free(line);
+				continue;
+			}
 
-		fullpath = findpath(tok, path, pcpy);
-		if (handle_builtin(tok, line) == 1)
-			continue;
+			fullpath = findpath(tok, path, pcpy);
+			if (handle_builtin(tok, line, xstat) == 1)
+				continue;
+			xstat = process(tok, line, fullpath);
+		}
 		else
-			process(fullpath, tok);
-/*		if (_strcmp(tok[0], "exit") == 0)
-		{
 			free(line);
-			free(tok);
-			shell_exit();
-		}
-
-		process(fullpath, tok);
-*/
-		free(line);
-		free(tok);
 	}
-	free(fullpath);
 	return (0);
 }
