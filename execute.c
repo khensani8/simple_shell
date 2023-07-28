@@ -13,9 +13,6 @@ int process(char *path, char **ar)
 	pid_t child = fork();
 	int status = 0;
 
-	if (check_builtin(ar))
-		return (status);
-
 	if (child == 0)
 	{
 		if (execve(path, ar, environ) == -1)
@@ -34,3 +31,4 @@ int process(char *path, char **ar)
 
 	return (0);
 }
+

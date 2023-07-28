@@ -15,6 +15,8 @@
 /***** ENVIRONMENT *****/
 extern char **environ;
 char *_getenv(char *envp);
+int _setenv(const char *variable, const char *value);
+int _unsetenv(const char *name);
 
 /***** FUNCTIONS *****/
 char *rd_line(void);
@@ -30,6 +32,7 @@ void hsh_exit(char **ar);
 int hsh_cd(char **ar);
 int check_builtin(char **cmd);
 int handle_builtin(char **cmd);
+void shell_exit(void);
 
 /***** STRING FUNCTIONS *****/
 char *_strcat(char *dest, char *src);

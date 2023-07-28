@@ -1,21 +1,6 @@
 #include "shell.h"
 
 /**
- * hsh_exit - exits shell
- * Return: void
- */
-void hsh_exit(char **ar)
-{
-	int i = 0;
-
-	if (ar[1] != NULL)
-		i = atoi(ar[1]);
-	free(ar);
-
-	exit(i);
-}
-
-/**
  * print_env - print environment
  * Return: ...
  */
@@ -23,7 +8,7 @@ int print_env(void)
 {
 	int i = 0;
 
-	while (environ[i])
+	while (environ[i] != NULL)
 	{
 		write(STDOUT_FILENO, environ[i], strlen(environ[i]));
 		write(STDOUT_FILENO, "\n", 1);
@@ -31,3 +16,13 @@ int print_env(void)
 	}
 	return (0);
 }
+
+/**
+ * shell_exit - exits the shell
+ */
+void shell_exit(void)
+{
+	/* Perform any cleanup or saving state here if necessary */
+	exit(EXIT_SUCCESS);
+}
+

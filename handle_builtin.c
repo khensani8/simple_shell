@@ -7,15 +7,20 @@
  */
 int handle_builtin(char **cmd)
 {
-	if (!cmd[0])
-		return (0);
-	if (!_strcmp(cmd[0], "exit"))
-		hsh_exit(cmd);
-	else if (!_strcmp(cmd[0], "env"))
+	if (_strcmp(*cmd, "exit") == 0)
+	{
+		shell_exit();
+		/*hsh_exit();*/
+		exit(EXIT_SUCCESS);
+	}
+
+	if (_strcmp(*cmd, "env") == 0)
+	{
 		print_env();
-	else
-		return (0);
-	return (1);
+		return (1);
+	}
+
+	return (0);
 }
 
 /**
