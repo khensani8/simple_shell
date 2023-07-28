@@ -20,9 +20,12 @@ int print_env(void)
 /**
  * shell_exit - exits the shell
  */
-void shell_exit(void)
+void shell_exit(char **ar)
 {
-	/* Perform any cleanup or saving state here if necessary */
-	exit(EXIT_SUCCESS);
-}
+	int status = 0;
 
+	if (ar[1] != NULL)
+		status = atoi(ar[1]);
+	/* Perform any cleanup or saving state here if necessary */
+	exit(status);
+}

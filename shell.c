@@ -38,7 +38,7 @@ int main(void)
 		{
 			free(line);
 			free(tok);
-			shell_exit();
+			shell_exit(tok);
 		}
 		process(fullpath, tok);
 
