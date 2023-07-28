@@ -17,12 +17,7 @@ int main(void)
 			write(STDOUT_FILENO, "($) ", 4);
 
 		line = rd_line();
-/*		if (_strcmp(line, "\n") == 0)
-		{
-			free(line);
-			continue;
-		}
-*/		tok = split_line(line);
+		tok = split_line(line);
 		if (tok[0] == NULL)
 		{
 			free(line);
@@ -36,7 +31,11 @@ int main(void)
                         shell_exit();
                 }
 		if (_strcmp(tok[0], "env") == 0)
+		{
+			free(line);
+			free(tok);
 			print_env();
+		}
 
 		path = _getenv("PATH");
 		fullpath = findpath(tok[0], fullpath, path);
