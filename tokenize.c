@@ -9,45 +9,49 @@
 
 char **split_line(char *line)
 {
-	int i, bufsize;
-	char *delim, *tok;
-	char **toks;
+	int i = 0, count = 0;
+	char *tok, **toks;
+	char *delim = " \t\n";
+	
+	count = _strsep(line);
+	if (!count)
+		return (NULL);
 
-	bufsize = 1024;
-	delim = " \t\n\r\a";
-	toks = malloc(bufsize * sizeof(char *));
-
+	toks = malloc((count + 1) * sizeof(char *));
 	if (toks == NULL)
-	{
-		perror("hsh");
-		exit(EXIT_FAILURE);
-	}
-	tok = strtok(line, delim);
-	i = 0;
+		exit(1);
 
+	tok = strtok(line, delim);
 	while (tok != NULL)
 	{
 		toks[i] = tok;
 		i++;
 
-		if (i >= bufsize)
+/*		if (i >= bufsize)
 		{
 			bufsize += 1024;
 			toks = realloc(toks, bufsize * sizeof(char *));
 		}
-		tok = strtok(NULL, delim);
+*/		tok = strtok(NULL, delim);
 	}
 	toks[i] = NULL;
 
 	return (toks);
 }
 
-/**
- * free_tokens - Frees the memory allocated for an array of tokens.
- *
- * @toks: The array of tokens to be freed.
- */
-void free_tokens(char **toks)
+int _strsep(char *str)
 {
-	free(toks);
+    int flag = 1, count = 0, i;
+
+    for (i = 0; str[i]; i++)
+    {
+        if (str[i] != ' ' && flag == 1)
+        {
+            count += 1;
+            flag = 0;
+        }
+        if (str[i + 1] == ' ')
+            flag = 1;
+    }
+    return (count);
 }

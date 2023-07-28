@@ -5,37 +5,25 @@
  * @cmd: argument entered
  * Return: builtin to execute
  */
-int handle_builtin(char **cmd)
+int handle_builtin(char **cmd, char *line)
 {
 	if (!cmd[0])
 		return (0);
-	if (_strcmp(*cmd, "exit") == 0)
+	if (_strcmp(cmd[0], "exit") == 0)
 	{
+		free_cmd(cmd);
 		free(cmd);
-		shell_exit();
+		free(line);
+		exit(EXIT_SUCCESS);
 	}
-	if (_strcmp(*cmd, "env") == 0)
+	if (_strcmp(cmd[0], "env") == 0)
 	{
 		print_env();
+		free_cmd(cmd);
+		free(cmd);
+		free(line);
 		return (1);
 	}
-
-	return (0);
+	else
+		return (0);
 }
-
-/**
- * check_builtin - checks for builtin
- * @cmd: split line
- * Return: 1 if cmd excuted, 0 if cmd is not executed
- *
-int check_builtin(char **cmd)
-{
-	if (handle_builtin(cmd))
-		return (1);
-	else if (**cmd == '/')
-	{
-		process(cmd[0], cmd);
-		return (1);
-	}
-	return (0);
-}*/

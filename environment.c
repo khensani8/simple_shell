@@ -5,7 +5,7 @@
  * @envp: ...
  * Return: ...
  */
-char *_getenv(char *envp)
+char *_getenv(const char *envp)
 {
 	int status, i, j;
 
@@ -81,4 +81,3 @@ int _unsetenv(const char *name)
 	}
 	return (0);
 }
-
