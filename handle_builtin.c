@@ -7,7 +7,7 @@
  * @xstat: exit status
  * Return: builtin to execute
  */
-int handle_builtin(char **cmd, char *line, int xstat)
+int handle_builtin(char **cmd, char *line)
 {
 	if (!cmd[0])
 		return (0);
@@ -16,7 +16,7 @@ int handle_builtin(char **cmd, char *line, int xstat)
 		free_cmd(cmd);
 		free(cmd);
 		free(line);
-		exit(xstat);
+		exit(EXIT_SUCCESS);
 	}
 	if (_strcmp(cmd[0], "env") == 0)
 	{

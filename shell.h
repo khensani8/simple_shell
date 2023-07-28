@@ -29,7 +29,7 @@ int process(char **ar, char *line, char *fullpath);
 
 /***** BUILT-INS *****/
 void _cd(char **ar);
-int handle_builtin(char **cmd, char *line, int xstat);
+int handle_builtin(char **cmd, char *line);
 void shell_exit(void);
 
 /***** STRING FUNCTIONS *****/
